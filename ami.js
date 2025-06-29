@@ -33,4 +33,3 @@ function submitFeedback() {
   alert("Thank you for your feedback!");
   // Optionally log or send feedback data here
 }
-
