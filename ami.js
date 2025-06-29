@@ -8,7 +8,6 @@ async function sendMessage() {
     return;
   }
 
-  // Show loading
   const responseBox = document.getElementById("response");
   responseBox.innerHTML = "<em>Thinking...</em>";
 
@@ -26,15 +25,12 @@ async function sendMessage() {
     responseBox.innerHTML = "<span style='color:red;'>Error contacting AMI. Please try again later.</span>";
     console.error("Error:", error);
   }
+}
 
-async function submitFeedback() {
-
+function submitFeedback() {
   const score = document.getElementById("feedbackScore").value;
   const comment = document.getElementById("feedbackComment").value;
   alert("Thank you for your feedback!");
-
-
+  // Optionally log or send feedback data here
 }
 
-
-  
