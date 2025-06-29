@@ -33,8 +33,6 @@ async function submitFeedback() {
   const comment = document.getElementById("feedbackComment").value;
   alert("Thank you for your feedback!");
 
-  // Optionally send this to a backend endpoint or log it locally
-}
 function startVoiceInput() {
   const voiceStatus = document.getElementById("voice-status");
   voiceStatus.innerText = "Listening...";
@@ -70,3 +68,6 @@ function startVoiceInput() {
 
   recognition.start();
 }
+
+
+  
