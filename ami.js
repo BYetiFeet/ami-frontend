@@ -29,6 +29,44 @@ async function sendMessage() {
 }
 
 async function submitFeedback() {
+
+  function startVoiceInput() {
+  const voiceStatus = document.getElementById("voice-status");
+  voiceStatus.innerText = "Listening...";
+
+  // Check browser support
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    alert("Voice input not supported in this browser.");
+    voiceStatus.innerText = "";
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+  recognition.lang = 'en-GB';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  recognition.onresult = function(event) {
+    const transcript = event.results[0][0].transcript;
+    document.getElementById("message").value = transcript;
+    voiceStatus.innerText = "✔️ Captured: " + transcript;
+  };
+
+  recognition.onerror = function(event) {
+    console.error("Speech recognition error:", event.error);
+    voiceStatus.innerText = "❌ Error: " + event.error;
+  };
+
+  recognition.onend = function() {
+    if (voiceStatus.innerText === "Listening...") {
+      voiceStatus.innerText = "❌ No speech detected";
+    }
+  };
+
+  recognition.start();
+}
+
   const score = document.getElementById("feedbackScore").value;
   const comment = document.getElementById("feedbackComment").value;
   alert("Thank you for your feedback!");
