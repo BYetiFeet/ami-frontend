@@ -13,7 +13,7 @@ async function sendMessage() {
   responseBox.innerHTML = "<em>Thinking...</em>";
 
   try {
-    const response = await fetch("https://your-ami-backend.onrender.com/ask", {
+    const response = await fetch("https://ami-assistant-backend.onrender.com/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message, role, user_id })
