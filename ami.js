@@ -26,15 +26,12 @@ async function sendMessage() {
     responseBox.innerHTML = "<span style='color:red;'>Error contacting AMI. Please try again later.</span>";
     console.error("Error:", error);
   }
-}
 
-async function submitFeedback() {
 
-  function startVoiceInput() {
+function startVoiceInput() {
   const voiceStatus = document.getElementById("voice-status");
   voiceStatus.innerText = "Listening...";
 
-  // Check browser support
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SpeechRecognition) {
     alert("Voice input not supported in this browser.");
@@ -66,6 +63,10 @@ async function submitFeedback() {
 
   recognition.start();
 }
+
+  }
+
+async function submitFeedback() {
 
   const score = document.getElementById("feedbackScore").value;
   const comment = document.getElementById("feedbackComment").value;
