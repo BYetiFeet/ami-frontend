@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AMI — Home Care Assistant</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Talk to AMI</h1>
+    <label for="role">Who are you?</label>
+    <select id="role">
+      <option value="client">Client</option>
+      <option value="carer">Carer</option>
+      <option value="family">Family Member</option>
+      <option value="manager">Care Manager</option>
+    </select>
+
+    <textarea id="message" placeholder="Type your question or concern..."></textarea>
+    <button onclick="sendMessage()">Send</button>
+
+    <div id="response"></div>
+
+    <div id="feedback" style="display:none;">
+      <p>Was this helpful?</p>
+      <select id="feedbackScore">
+        <option value="5">🌟🌟🌟🌟🌟</option>
+        <option value="4">🌟🌟🌟🌟</option>
+        <option value="3">🌟🌟🌟</option>
+        <option value="2">🌟🌟</option>
+        <option value="1">🌟</option>
+      </select>
+      <textarea id="feedbackComment" placeholder="Any comments? (optional)"></textarea>
+      <button onclick="submitFeedback()">Submit Feedback</button>
+    </div>
+  </div>
+
+  <script src="ami.js"></script>
+</body>
+</html>
