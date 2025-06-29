@@ -2,6 +2,7 @@ async function sendMessage() {
   const role = document.getElementById("role").value;
   const message = document.getElementById("message").value;
   const user_id = "user_" + Date.now(); // Temporary unique ID
+  const timestamp = new Date().toISOString();
 
   if (!message.trim()) {
     alert("Please enter a message.");
@@ -19,17 +20,27 @@ async function sendMessage() {
     });
 
     const data = await response.json();
-    responseBox.innerText = data.reply || "No response received.";
+    const reply = data.reply || "No response received.";
+    responseBox.innerText = reply;
     document.getElementById("feedback").style.display = "block";
 
-    // Optionally: store details to use during feedback
-    window.lastAmiData = {
-      user_id,
-      role,
-      message,
-      reply: data.reply,
-      timestamp: new Date().toISOString()
-    };
+    // Store for later feedback submission
+    window.lastAmiData = { user_id, role, message, reply, timestamp };
+
+    // Log the message to Google Sheets
+    await fetch("https://script.google.com/macros/s/AKfycbzrpW3Vj_Xz2UTsvlyI4B9fe1d3uIvMry5FI9DIUhTJfQFErVYxY659VYCBzu0xwh8i/exec", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        mode: "log",
+        timestamp,
+        user_id,
+        role,
+        user_message: message,
+        ami_reply: reply
+      })
+    });
+
   } catch (error) {
     responseBox.innerHTML = "<span style='color:red;'>Error contacting AMI. Please try again later.</span>";
     console.error("Error:", error);
@@ -49,9 +60,6 @@ async function submitFeedback() {
     mode: "feedback",
     timestamp: window.lastAmiData.timestamp,
     user_id: window.lastAmiData.user_id,
-    role: window.lastAmiData.role,
-    user_message: window.lastAmiData.message,
-    ami_reply: window.lastAmiData.reply,
     feedback_score: score,
     feedback_comment: comment
   };
