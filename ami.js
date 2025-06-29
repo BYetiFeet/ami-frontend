@@ -26,6 +26,15 @@ async function sendMessage() {
     responseBox.innerHTML = "<span style='color:red;'>Error contacting AMI. Please try again later.</span>";
     console.error("Error:", error);
   }
+
+async function submitFeedback() {
+
+  const score = document.getElementById("feedbackScore").value;
+  const comment = document.getElementById("feedbackComment").value;
+  alert("Thank you for your feedback!");
+
+  // Optionally send this to a backend endpoint or log it locally
+}
 function startVoiceInput() {
   const voiceStatus = document.getElementById("voice-status");
   voiceStatus.innerText = "Listening...";
@@ -60,13 +69,4 @@ function startVoiceInput() {
   };
 
   recognition.start();
-}
-
-async function submitFeedback() {
-
-  const score = document.getElementById("feedbackScore").value;
-  const comment = document.getElementById("feedbackComment").value;
-  alert("Thank you for your feedback!");
-
-  // Optionally send this to a backend endpoint or log it locally
 }
