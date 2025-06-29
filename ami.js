@@ -26,8 +26,6 @@ async function sendMessage() {
     responseBox.innerHTML = "<span style='color:red;'>Error contacting AMI. Please try again later.</span>";
     console.error("Error:", error);
   }
-
-
 function startVoiceInput() {
   const voiceStatus = document.getElementById("voice-status");
   voiceStatus.innerText = "Listening...";
@@ -63,8 +61,6 @@ function startVoiceInput() {
 
   recognition.start();
 }
-
-  }
 
 async function submitFeedback() {
 
