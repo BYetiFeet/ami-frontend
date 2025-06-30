@@ -30,24 +30,23 @@ async function sendMessage() {
     window.lastAmiData = { user_id, role, message, reply, timestamp };
 
     // 2. Send log to proxy backend (Render endpoint)
-    await fetch("https://ami-assistant-backend.onrender-1.com/log-to-sheets", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        mode: "log",
-        timestamp,
-        user_id,
-        role,
-        user_message: message,
-        ami_reply: reply
-      })
-    });
-
-  } catch (error) {
-    responseBox.innerHTML = "<span style='color:red;'>Error contacting AMI. Please try again later.</span>";
-    console.error("Error:", error);
-  }
+   try {
+  await fetch("https://ami-assistant-backend.onrender.com/log-to-sheets", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      mode: "log",
+      timestamp,
+      user_id,
+      role,
+      user_message: message,
+      ami_reply: reply
+    })
+  });
+} catch (err) {
+  console.error("Logging failed:", err); // This won't break the page now
 }
+
 
 // 3. Feedback submission logic
 async function submitFeedback() {
