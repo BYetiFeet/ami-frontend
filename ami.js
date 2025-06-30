@@ -15,7 +15,7 @@ async function sendMessage() {
 
   try {
     // Send message to AMI backend
-    const response = await fetch("https://ami-assistant-backend-.onrender.com/ask", {
+    const response = await fetch("https://ami-assistant-backend.onrender.com/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message, role, user_id })
