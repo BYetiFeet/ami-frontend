@@ -30,24 +30,28 @@ async function sendMessage() {
     window.lastAmiData = { user_id, role, message, reply, timestamp };
 
     // 2. Send log to proxy backend (Render endpoint)
-   try {
- try {
-  await fetch("https://ami-assistant-backend.onrender.com/log-to-sheets", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      mode: "log",
-      timestamp,
-      user_id,
-      role,
-      user_message: message,
-      ami_reply: reply
-    })
-  });
-} catch (err) {
-  console.warn("Logging to Sheets failed:", err);
-}
+    try {
+      await fetch("https://ami-assistant-backend.onrender.com/log-to-sheets", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          mode: "log",
+          timestamp,
+          user_id,
+          role,
+          user_message: message,
+          ami_reply: reply
+        })
+      });
+    } catch (err) {
+      console.warn("Logging to Sheets failed:", err);
+    }
 
+  } catch (error) {
+    responseBox.innerHTML = "<span style='color:red;'>Error contacting AMI. Please try again later.</span>";
+    console.error("Error:", error);
+  }
+}
 
 // 3. Feedback submission logic
 async function submitFeedback() {
@@ -68,7 +72,6 @@ async function submitFeedback() {
   };
 
   try {
-    // Send feedback directly to Google Apps Script endpoint
     const response = await fetch("https://script.google.com/macros/s/AKfycbxNt4pS-U-jcpTV3UuI-ROsVEIs2Y2XDsqcFsKCsMWk8_Ov1yTDPZb_JKNCXZvGqReD/exec", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -86,3 +89,4 @@ async function submitFeedback() {
     alert("An error occurred while sending feedback.");
   }
 }
+
