@@ -31,6 +31,7 @@ async function sendMessage() {
 
     // 2. Send log to proxy backend (Render endpoint)
    try {
+ try {
   await fetch("https://ami-assistant-backend.onrender.com/log-to-sheets", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -44,7 +45,7 @@ async function sendMessage() {
     })
   });
 } catch (err) {
-  console.error("Logging failed:", err); // This won't break the page now
+  console.warn("Logging to Sheets failed:", err);
 }
 
 
