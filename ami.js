@@ -1,7 +1,7 @@
 async function sendMessage() {
   const role = document.getElementById("role").value;
   const message = document.getElementById("message").value;
-  const user_id = "user_" + Date.now(); // Temporary unique ID
+  const user_id = "user_" + Date.now();
   const timestamp = new Date().toISOString();
 
   if (!message.trim()) {
@@ -24,11 +24,9 @@ async function sendMessage() {
     responseBox.innerText = reply;
     document.getElementById("feedback").style.display = "block";
 
-    // Store for later feedback submission
     window.lastAmiData = { user_id, role, message, reply, timestamp };
 
-    // Log the message to Google Sheets
-    await fetch("https://script.google.com/macros/s/AKfycbzL7btR272SqodlEp2Ek7kJSxCMw-VM-SxV01EyAhZmeHkRqSSLvd6uyLGcBIzvQQNR/exec", {
+    await fetch("https://ami-assistant-backend.onrender.com/log-to-sheets", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -40,7 +38,6 @@ async function sendMessage() {
         ami_reply: reply
       })
     });
-
   } catch (error) {
     responseBox.innerHTML = "<span style='color:red;'>Error contacting AMI. Please try again later.</span>";
     console.error("Error:", error);
@@ -65,7 +62,7 @@ async function submitFeedback() {
   };
 
   try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbzL7btR272SqodlEp2Ek7kJSxCMw-VM-SxV01EyAhZmeHkRqSSLvd6uyLGcBIzvQQNR/exec", {
+    const response = await fetch("https://ami-assistant-backend.onrender.com/log-to-sheets", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
