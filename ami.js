@@ -28,7 +28,7 @@ async function sendMessage() {
     window.lastAmiData = { user_id, role, message, reply, timestamp };
 
     // Log the message to Google Sheets
-    await fetch("https://script.google.com/macros/s/AKfycbzrpW3Vj_Xz2UTsvlyI4B9fe1d3uIvMry5FI9DIUhTJfQFErVYxY659VYCBzu0xwh8i/exec", {
+    await fetch("https://script.google.com/macros/s/AKfycbzL7btR272SqodlEp2Ek7kJSxCMw-VM-SxV01EyAhZmeHkRqSSLvd6uyLGcBIzvQQNR/exec", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -65,7 +65,7 @@ async function submitFeedback() {
   };
 
   try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbzrpW3Vj_Xz2UTsvlyI4B9fe1d3uIvMry5FI9DIUhTJfQFErVYxY659VYCBzu0xwh8i/exec", {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbzL7btR272SqodlEp2Ek7kJSxCMw-VM-SxV01EyAhZmeHkRqSSLvd6uyLGcBIzvQQNR/exec", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
