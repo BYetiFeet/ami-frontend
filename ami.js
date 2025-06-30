@@ -89,4 +89,3 @@ async function submitFeedback() {
     alert("An error occurred while sending feedback.");
   }
 }
-
