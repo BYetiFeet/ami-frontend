@@ -72,7 +72,7 @@ async function submitFeedback() {
   };
 
   try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbxNt4pS-U-jcpTV3UuI-ROsVEIs2Y2XDsqcFsKCsMWk8_Ov1yTDPZb_JKNCXZvGqReD/exec", {
+    const response = await fetch("https://ami-assistant-backend.onrender.com/submit-feedback", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
